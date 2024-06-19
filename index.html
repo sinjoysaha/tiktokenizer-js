@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>Tiktokenizer.js</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <main>
+        <div class="container mt-4">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-4 px-0">
+                    <h1>Tiktokenizer.js</h1>
+                </div>
+                <div class="col-4 px-2">
+                    <select class="form-select" name="selector" id="model-selector">
+                        <optgroup label="Tokenizers">
+                            <option selected label="bpe" value="bpe"></option>
+                            <!-- <option label="wpe" value="wpe"></option> -->
+                        </optgroup>
+                        <optgroup label="Models">
+                            <option label="gpt-2" value="gpt-2"></option>
+                            <!-- <option label="bert" value="bert"></option> -->
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col left-col">
+                    <!-- <div class="row mt-2 messages justify-content-between align-items-center">
+                        <div class="col-3 px-0">
+                            <select class="form-select" name="speaker" id="speaker">
+                                <option label="User" value="User"></option>
+                                <option selected label="System" value="Systen"></option>
+                                <option label="Assistant" value="Assistant"></option>
+                                <option label="Custom" value="Custom"></option>
+                            </select>
+                        </div>
+                        <div class="col-8 px-2">
+                            <textarea class="form-control resize-none" type="text" name="message" rows="1"
+                                cols="45">You are a helpful assistant</textarea>
+                        </div>
+                        <div class="col-1 px-0 btn-div">
+                            <button type="button" class="btn btn-close"></button>
+                        </div>
+                    </div>
+                    <div class="row mt-2 messages justify-content-between align-items-center">
+                        <div class="col-3 px-0">
+                            <select class="form-select" name="speaker" id="speaker">
+                                <option selected label="User" value="User"></option>
+                                <option label="System" value="Systen"></option>
+                                <option label="Assistant" value="Assistant"></option>
+                                <option label="Custom" value="Custom"></option>
+                            </select>
+                        </div>
+                        <div class="col-8 px-2">
+                            <textarea class="form-control  resize-none" type="text" name="message" rows="1"
+                                cols="36"></textarea>
+                        </div>
+                        <div class="col-1 px-0 btn-div">
+                            <button type="button" class="btn btn-close"></button>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <button class="btn btn-dark">Add Message</button>
+                    </div> -->
+                    <div class="row mt-2">
+                        <textarea class="form-control font-monospace p-3" type="text" name="message" id="message"
+                            rows="12" cols="50"></textarea>
+                    </div>
+                </div>
+                <div class="col ps-3 right-col">
+                    <div class="row mt-2 px-2 justify-content-between align-items-center">
+                        <div class="col px-0 pe-0">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Token Count</h5>
+                                    <p class="card-text" id="tokenCount"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="col-6 px-0 ps-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Price per prompt</h5>
+                                    <p class="card-text" id="tokenPrice"></p>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="row mt-3 px-2 color-color">
+                        <div class="col px-0 card-container fixed">
+                            <div class="card px-0 h-100">
+                                <div class="card-body">
+                                    <div class="card-text font-monospace break-all">
+                                        <pre class="break-all unvcenter" id="output"></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 px-2 tokens">
+                        <div class="col px-0 card-container">
+                            <div class="card px-0 h-100">
+                                <div class="card-body">
+                                    <div class="card-text font-monospace break-all" id="tokenIds">
+                                        <span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="row mt-3 px-2">
+                        <div class="col px-0">
+                            <input class="form-check-input" type="checkbox" name="whitespace" id="whitespace"
+                                value="yes">
+                            <label for="whitespace">Show whitespace</label>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <footer class="row mt-4 justify-content-between align-items-center">
+                <div class="col-md-4 px-0 built-by align-items-center">
+                    <span class="text-muted">Built by </span><span><a class="font-weight-bold text-dark"
+                            href="https://sinjoysaha.github.io">Sinjoy Saha</a></span><span class="text-muted">.</span>
+                </div>
+                <ul class="nav col-md-4 px-0 justify-content-end list-unstyled d-flex">
+                    <li class=""><a class="btn" href="https://github.com/sinjoysaha" target="_blank"><i class="bi bi-github"></i></a></li>
+                    <li class=""><a class="btn" href="https://linkedin.com/in/sinjoysaha" target="_blank"><i class="bi bi-linkedin"></i></a></li>
+                    <li class=""><a class="btn" href="https://twitter.com/sinjoysaha" target="_blank"><i class="bi bi-twitter"></i></a></li>
+                </ul>
+            </footer>
+        </div>
+    </main>
+    <script src="app.js"></script>
+</body>
+
+</html>

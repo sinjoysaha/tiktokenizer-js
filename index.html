@@ -26,7 +26,7 @@
                             <!-- <option label="wpe" value="wpe"></option> -->
                         </optgroup>
                         <optgroup label="Models">
-                            <option label="gpt-2" value="gpt-2"></option>
+                            <option label="gpt-2 (bpe)" value="gpt-2"></option>
                             <!-- <option label="bert" value="bert"></option> -->
                         </optgroup>
                     </select>
@@ -73,7 +73,7 @@
                     </div> -->
                     <div class="row mt-2">
                         <textarea class="form-control font-monospace p-3" type="text" name="message" id="message"
-                            rows="12" cols="50"></textarea>
+                            rows="12" cols="50" placeholder="Start typing here ..."></textarea>
                     </div>
                 </div>
                 <div class="col ps-3 right-col">
@@ -127,8 +127,32 @@
                     </div> -->
                 </div>
             </div>
+            <br>
+            <div class="col-12 px-0">
+                <p class="text-muted">
+                    A custom tokenizer visualizer written in pure JavaScript that mirrors the functionality of <a
+                        class="font-weight-bold text-dark" href=" https://platform.openai.com/tokenizer" target="_blank">OpenAI's
+                        GPT-2/GPT-3
+                        Byte
+                        Pair Encoding (BPE) tokenizer </a> to showcase how text is tokenized
+                    into subword
+                    units. The <span class="font-weight-bold text-dark">encoder.json</span> and <span
+                        class="font-weight-bold text-dark">vocab.bpe</span> files provided by OpenAI are used here so the tokens IDs
+                    are
+                    exactly matches the official BPE (GPT-2/GPT-3) representation. Currently, the dropdown on top is just a
+                    placeholder
+                    to add more schemes in future. Try different characters including ASCII, emojis, and non-English languages!
+                    <br>
+                    Did you notice any difference from the <a
+                    class="font-weight-bold text-dark" href=" https://platform.openai.com/tokenizer" target="_blank">official tokenizer</a> 😎 Check out the <a class="font-weight-bold text-dark"
+                        href="https://sinjoysaha.github.io">GitHub Repo</a> for this
+                    project. See more projects <a class="font-weight-bold text-dark" href="https://sinjoysaha.github.io">here</a>.
+                </p>
+            </div>
             <footer class="row mt-4 justify-content-between align-items-center">
                 <div class="col-md-4 px-0 built-by align-items-center">
+                    <span class="text-muted">Inspired by </span><span><a class="font-weight-bold text-dark"
+                        href="https://tiktokenizer.vercel.app/?model=gpt2" target="_blank">Tiktokenizer</a></span><span class="text-muted">.</span>
                     <span class="text-muted">Built by </span><span><a class="font-weight-bold text-dark"
                             href="https://sinjoysaha.github.io">Sinjoy Saha</a></span><span class="text-muted">.</span>
                 </div>
@@ -141,6 +165,16 @@
         </div>
     </main>
     <script src="app.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TDS38QPM4D"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-TDS38QPM4D');
+    </script>
+    <!-- End of Google tag (gtag.js) -->
 </body>
 
 </html>

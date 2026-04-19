@@ -92,6 +92,115 @@ function updateValue(e) {
     tokenIds.innerHTML = colIds;
     tokenCount.innerHTML = ids.length;
     // tokenPrice.innerHTML = "$" + (ids.length * 0.00001).toFixed(4);
+
+    if (rawStr.trim().length > 0) {
+        document.getElementById('bpe-visualization').style.display = 'block';
+        updateBpeVisualizer(arr);
+    } else {
+        document.getElementById('bpe-visualization').style.display = 'none';
+    }
+}
+
+function updateBpeVisualizer(matches) {
+    const treeContainer = document.getElementById('bpe-tree');
+    treeContainer.innerHTML = '';
+
+    // Only show trees for the first few chunks to avoid performance issues if text is huge
+    // But let's try all first, maybe limited to 10 chunks.
+    const maxChunks = 15;
+    const chunksToShow = matches.slice(0, maxChunks);
+
+    chunksToShow.forEach((match, index) => {
+        const text = match[0];
+        const bytes = textEncoder.encode(text);
+        let byteEnc = "";
+        for (var i = 0; i < bytes.length; i++) {
+            byteEnc += byteEncoder[bytes[i]];
+        }
+        
+        const forest = getBpeTree(byteEnc);
+        
+        const chunkDiv = document.createElement('div');
+        chunkDiv.className = 'bpe-chunk-container';
+        
+        let forestHtml = '<div class="tree"><ul>';
+        forest.forEach(root => {
+            forestHtml += renderBpeNode(root);
+        });
+        forestHtml += '</ul></div>';
+        
+        chunkDiv.innerHTML = forestHtml;
+        treeContainer.appendChild(chunkDiv);
+    });
+
+    if (matches.length > maxChunks) {
+        const more = document.createElement('div');
+        more.className = 'text-muted mt-2';
+        more.innerText = `... and ${matches.length - maxChunks} more chunks.`;
+        treeContainer.appendChild(more);
+    }
+}
+
+function getBpeTree(token) {
+    let wordNodes = Array.from(token).map(c => ({ text: c, children: [] }));
+    let word = Array.from(token);
+    
+    var pairs = getPairs(word);
+    if (pairs.length == 0) return wordNodes;
+
+    while (true) {
+        if (pairs.length === 0) break;
+        var bigram = pairs.reduce((acc, x) => (acc in bpe_ranks ? bpe_ranks[acc] : Infinity) < (x in bpe_ranks ? bpe_ranks[x] : Infinity) ? acc : x );
+        if (!(bigram in bpe_ranks)) break;
+
+        const [first, second] = bigram.split(" ");
+        let newWord = [];
+        let newNodes = [];
+        let i = 0;
+        while (i < word.length) {
+            if ((word[i] == first) && (i < word.length - 1) && (word[i + 1] == second)) {
+                let mergedText = first + second;
+                newWord.push(mergedText);
+                newNodes.push({
+                    text: mergedText,
+                    children: [wordNodes[i], wordNodes[i+1]]
+                });
+                i += 2;
+            } else {
+                newWord.push(word[i]);
+                newNodes.push(wordNodes[i]);
+                i += 1;
+            }
+        }
+        word = newWord;
+        wordNodes = newNodes;
+        if (word.length == 1) break;
+        else pairs = getPairs(word);
+    }
+    return wordNodes;
+}
+
+function renderBpeNode(node) {
+    let text = node.text;
+    // Replace spaces with a visible character if it's a space
+    if (text === " ") text = " \u00B7"; // Middle dot for space
+    
+    let html = `<li><div class="node-box">${escapeHtml(text)}</div>`;
+    if (node.children && node.children.length > 0) {
+        html += `<ul>`;
+        node.children.forEach(child => {
+            html += renderBpeNode(child);
+        });
+        html += `</ul>`;
+    }
+    html += `</li>`;
+    return html;
+}
+
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
 }
 
 function encode(strToTokenize) {

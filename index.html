@@ -73,7 +73,15 @@
                     </div> -->
                     <div class="row mt-2">
                         <textarea class="form-control font-monospace p-3" type="text" name="message" id="message"
-                            rows="12" cols="50" placeholder="Start typing here ..."></textarea>
+                            rows="5" cols="50" placeholder="Start typing here ..."></textarea>
+                    </div>
+                    <div class="row mt-3">
+                        <div id="bpe-visualization" class="card" style="overflow-x: auto;">
+                            <div class="card-body">
+                                <h5 class="card-title">Token Merge Tree</h5>
+                                <div id="bpe-tree" class="d-flex flex-wrap gap-4"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col ps-3 right-col">
@@ -131,35 +139,45 @@
             <div class="col-12 px-0">
                 <p class="text-muted">
                     A custom tokenizer visualizer written in pure JavaScript that mirrors the functionality of <a
-                        class="font-weight-bold text-dark" href=" https://platform.openai.com/tokenizer" target="_blank">OpenAI's
+                        class="font-weight-bold text-dark" href=" https://platform.openai.com/tokenizer"
+                        target="_blank">OpenAI's
                         GPT-2/GPT-3
                         Byte
                         Pair Encoding (BPE) tokenizer </a> to showcase how text is tokenized
                     into subword
                     units. The <span class="font-weight-bold text-dark">encoder.json</span> and <span
-                        class="font-weight-bold text-dark">vocab.bpe</span> files provided by OpenAI are used here so the tokens IDs
+                        class="font-weight-bold text-dark">vocab.bpe</span> files provided by OpenAI are used here so
+                    the tokens IDs
                     are
-                    exactly matches the official BPE (GPT-2/GPT-3) representation. Currently, the dropdown on top is just a
+                    exactly matches the official BPE (GPT-2/GPT-3) representation. Currently, the dropdown on top is
+                    just a
                     placeholder
-                    to add more schemes in future. Try different characters including ASCII, emojis, and non-English languages!
+                    to add more schemes in future. Try different characters including ASCII, emojis, and non-English
+                    languages!
                     <br>
-                    Did you notice any difference from the <a
-                    class="font-weight-bold text-dark" href=" https://platform.openai.com/tokenizer" target="_blank">official tokenizer</a> 😎 Check out the <a class="font-weight-bold text-dark"
+                    Did you notice any difference from the <a class="font-weight-bold text-dark"
+                        href=" https://platform.openai.com/tokenizer" target="_blank">official tokenizer</a> 😎 Check
+                    out the <a class="font-weight-bold text-dark"
                         href="https://github.com/sinjoysaha/tiktokenizer-js">GitHub Repo</a> for this
-                    project. See more projects <a class="font-weight-bold text-dark" href="https://sinjoysaha.github.io">here</a>.
+                    project. See more projects <a class="font-weight-bold text-dark"
+                        href="https://sinjoysaha.github.io">here</a>.
                 </p>
             </div>
             <footer class="row mt-4 justify-content-between align-items-center">
                 <div class="col-md-4 px-0 built-by align-items-center">
                     <span class="text-muted">Inspired by </span><span><a class="font-weight-bold text-dark"
-                        href="https://tiktokenizer.vercel.app/?model=gpt2" target="_blank">Tiktokenizer</a></span><span class="text-muted">.</span>
+                            href="https://tiktokenizer.vercel.app/?model=gpt2"
+                            target="_blank">Tiktokenizer</a></span><span class="text-muted">.</span>
                     <span class="text-muted">Built by </span><span><a class="font-weight-bold text-dark"
                             href="https://sinjoysaha.github.io">Sinjoy Saha</a></span><span class="text-muted">.</span>
                 </div>
                 <ul class="nav col-md-4 px-0 justify-content-end list-unstyled d-flex">
-                    <li class=""><a class="btn" href="https://github.com/sinjoysaha" target="_blank"><i class="bi bi-github"></i></a></li>
-                    <li class=""><a class="btn" href="https://linkedin.com/in/sinjoysaha" target="_blank"><i class="bi bi-linkedin"></i></a></li>
-                    <li class=""><a class="btn" href="https://twitter.com/sinjoysaha" target="_blank"><i class="bi bi-twitter"></i></a></li>
+                    <li class=""><a class="btn" href="https://github.com/sinjoysaha" target="_blank"><i
+                                class="bi bi-github"></i></a></li>
+                    <li class=""><a class="btn" href="https://linkedin.com/in/sinjoysaha" target="_blank"><i
+                                class="bi bi-linkedin"></i></a></li>
+                    <li class=""><a class="btn" href="https://twitter.com/sinjoysaha" target="_blank"><i
+                                class="bi bi-twitter"></i></a></li>
                 </ul>
             </footer>
         </div>
